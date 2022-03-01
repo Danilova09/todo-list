@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const Users = await User.find();
-        res.send(Users);
+        const users = await User.find();
+        res.send(users);
     } catch (e) {
         next(e);
     }

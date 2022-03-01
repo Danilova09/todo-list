@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const app = express();
 const config = require('./config');
 const users = require('./app/users');
-// const tasks = require('./app/tasks');
+const tasks = require('./app/tasks');
 const port = 8000;
 
 app.use(cors());
 app.use(express.json());
 app.use('/users', (users));
-// app.use('/tasks', (tasks));
+app.use('/tasks', (tasks));
 
 const run = async () => {
     await mongoose.connect(config.mongo.db, config.mongo.options);
