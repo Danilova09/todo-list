@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppTaskState } from '../store/types';
+import { fetchTasksRequest } from '../store/tasks.actions';
+import { Task } from '../models/task.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
@@ -6,10 +11,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+  tasks: Observable<Task[]>;
+  loading: Observable<boolean>;
+  error: Observable<null | string>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private store: Store<AppTaskState>) {
+    this.tasks = store.select(state => state.tasks.tasks);
+    this.loading = store.select(state => state.tasks.fetchLoading);
+    this.error = store.select(state => state.tasks.fetchError);
   }
 
+  ngOnInit(): void {
+    this.store.dispatch(fetchTasksRequest());
+  }
 }

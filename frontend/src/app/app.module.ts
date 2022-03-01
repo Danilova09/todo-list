@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +19,9 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
+import { tasksReducer } from './store/tasks.reducer';
+import { TasksEffects } from './store/tasks.effects';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,6 @@ import { MatSelectModule } from '@angular/material/select';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
     MatToolbarModule,
     MatIconModule,
     LayoutModule,
@@ -44,9 +44,16 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     FlexLayoutModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule,
+    StoreModule.forRoot({
+      tasks: tasksReducer,
+    }, {}),
+    EffectsModule.forRoot([
+      TasksEffects
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
