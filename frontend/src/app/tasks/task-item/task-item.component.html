@@ -1,21 +1,22 @@
-<mat-card fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center baseline" style="margin-top: 15px;">
+<mat-card fxLayout="row" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center baseline"
+          style="margin-top: 15px;">
   <span fxFlex="50%"><strong>Task: </strong>{{ task.title }}</span>
   <mat-form-field appearance="outline" fxFlex="20%">
     <mat-label>Select name</mat-label>
-    <mat-select>
-      <mat-option value="option">Option</mat-option>
-      <mat-option value="option">Name</mat-option>
-      <mat-option value="option">Name</mat-option>
+    <mat-select [(value)]="username" [disabled]="updatingTask">
+      <mat-option value="N/A">N/A</mat-option>
+      <mat-option *ngFor="let user of (users | async)" (click)="userChange(user)"
+                  [value]="user.username">{{ user.username }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline" fxFlex="20%">
-    <mat-select [(value)]="status">
+    <mat-select [(value)]="status" (selectionChange)="onStatusChange()" [disabled]="updatingTask">
+      <mat-option value="new">new</mat-option>
       <mat-option value="in_progress">in progress</mat-option>
       <mat-option value="complete">complete</mat-option>
-      <mat-option value="new">new</mat-option>
     </mat-select>
   </mat-form-field>
   <button mat-button color="warn" fxFlex="10%">
-    <mat-icon>delete</mat-icon>
+    <mat-icon (click)="delete()">delete</mat-icon>
   </button>
 </mat-card>

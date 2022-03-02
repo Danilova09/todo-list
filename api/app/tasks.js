@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find().populate('user');
         res.send(tasks);
     } catch (e) {
         next(e);
@@ -58,6 +58,11 @@ router.put('/:id',async (req, res, next) => {
         if (!req.body.user) {
             updateParams = {
                 status: req.body.status,
+            }
+        } else if (req.body.user === 'N/A') {
+            updateParams = {
+                status: req.body.status,
+                user: null,
             }
         } else {
             updateParams = {

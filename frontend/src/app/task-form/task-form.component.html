@@ -1,1 +1,17 @@
-<p>task-form works!</p>
+<form class="container task-from" (ngSubmit)="onSubmit()" #taskForm="ngForm">
+  <h2 class="task-title">Add task</h2>
+  <div style="display: flex; flex-direction: column;">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput required name="title" ngModel>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <mat-select name="user" ngModel>
+        <mat-option *ngFor="let user of (users | async)"
+                    [value]="user.id">{{ user.username }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary">add task</button>
+</form>

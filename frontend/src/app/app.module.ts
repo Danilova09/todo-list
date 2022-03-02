@@ -22,6 +22,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { tasksReducer } from './store/tasks.reducer';
 import { TasksEffects } from './store/tasks.effects';
+import { usersReducer } from './store/users.reducer';
+import { UsersEffects } from './store/users.effects';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,12 +50,16 @@ import { TasksEffects } from './store/tasks.effects';
     MatFormFieldModule,
     MatSelectModule,
     HttpClientModule,
+    FormsModule,
     StoreModule.forRoot({
       tasks: tasksReducer,
+      users: usersReducer
     }, {}),
     EffectsModule.forRoot([
-      TasksEffects
+      TasksEffects,
+      UsersEffects,
     ]),
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

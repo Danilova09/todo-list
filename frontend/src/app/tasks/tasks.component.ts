@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppTaskState } from '../store/types';
+import { AppState } from '../store/types';
 import { fetchTasksRequest } from '../store/tasks.actions';
 import { Task } from '../models/task.model';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class TasksComponent implements OnInit {
   loading: Observable<boolean>;
   error: Observable<null | string>;
 
-  constructor(private store: Store<AppTaskState>) {
+  constructor(private store: Store<AppState>) {
     this.tasks = store.select(state => state.tasks.tasks);
     this.loading = store.select(state => state.tasks.fetchLoading);
     this.error = store.select(state => state.tasks.fetchError);

@@ -1,0 +1,9 @@
+.task-from {
+  display: block;
+  margin: 40px auto;
+  width: 600px;
+}
+
+.task-title {
+  text-align: center;
+}

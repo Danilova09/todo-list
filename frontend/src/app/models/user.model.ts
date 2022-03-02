@@ -1,6 +1,11 @@
 export class User {
   constructor(
-    id: string,
-    username: string,
+    public id: string,
+    public username: string | null,
   ) {}
+}
+
+export interface ApiUserData {
+  _id: string,
+  username: string | null,
 }
